@@ -1,4 +1,4 @@
-package ovh.excale.discord;
+package ovh.excale.spaciaman;
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ovh.excale.discord.commands.BaseCommand;
+import ovh.excale.spaciaman.commands.BaseCommand;
 
 import java.io.InputStream;
 import java.util.Arrays;

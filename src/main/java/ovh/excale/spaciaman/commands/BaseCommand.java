@@ -1,4 +1,4 @@
-package ovh.excale.discord.commands;
+package ovh.excale.spaciaman.commands;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
