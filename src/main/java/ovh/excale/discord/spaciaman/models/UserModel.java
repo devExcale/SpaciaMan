@@ -1,6 +1,7 @@
 package ovh.excale.discord.spaciaman.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,5 +21,7 @@ public class UserModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
 	private Set<RoleSnapshotModel> roles;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
+	private List<KickMessageModel> kickMessages;
 
 }
