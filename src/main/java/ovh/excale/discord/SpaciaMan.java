@@ -18,14 +18,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class BaseDiscordBot {
+public class SpaciaMan {
 
 	public static final Logger logger;
 	public static final String VERSION;
 	public static final String OWNER;
 	public static final String[] CO_OWNERS;
 
-	private static final Class<BaseDiscordBot> selfClass = BaseDiscordBot.class;
+	private static final Class<SpaciaMan> selfClass = SpaciaMan.class;
 	private static final transient String TOKEN;
 	private static JDA jda;
 
@@ -79,15 +79,13 @@ public class BaseDiscordBot {
 		CommandClient client = new CommandClientBuilder().setOwnerId(OWNER)
 				.addCommands(new BaseCommand())
 				.setCoOwnerIds(CO_OWNERS)
-				.setActivity(Activity.listening("excale"))
-				.setPrefix("bot:")
+				.setActivity(Activity.watching(" for someone to kick | kc:help"))
+				.setPrefix("kc:")
 				.build();
 
 		try {
 
-			jda = JDABuilder.create(TOKEN,
-					GatewayIntent.GUILD_MESSAGES,
-					GatewayIntent.GUILD_MESSAGE_REACTIONS)
+			jda = JDABuilder.create(TOKEN, GatewayIntent.GUILD_MESSAGES)
 					.disableCache(CacheFlag.ACTIVITY,
 							CacheFlag.VOICE_STATE,
 							CacheFlag.EMOTE,
