@@ -27,10 +27,20 @@ public class SpaciaMan {
 
 	private static final Class<SpaciaMan> selfClass = SpaciaMan.class;
 	private static final transient String TOKEN;
+	private static boolean debug;
 	private static JDA jda;
 
 	public static JDA jda() {
 		return jda;
+	}
+
+	public static boolean debug() {
+		return debug;
+	}
+
+	public static void debug(boolean debug) {
+		SpaciaMan.debug = debug;
+		logger.info("Debug mode set to `{}`", debug);
 	}
 
 	static {
@@ -75,6 +85,13 @@ public class SpaciaMan {
 	}
 
 	public static void main(String[] args) {
+
+		for(String s : args)
+			if("debug".equals(s)) {
+				debug = true;
+				logger.info("Enabled debug mode");
+			} else
+				logger.warn("Unknown option \"{}\"", s);
 
 		CommandClient client = new CommandClientBuilder().setOwnerId(OWNER)
 				.addCommands(new BaseCommand())
