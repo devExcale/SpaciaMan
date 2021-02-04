@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ovh.excale.discord.spaciaman.commands.BaseCommand;
+import ovh.excale.discord.spaciaman.commands.KickCommand;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -77,7 +77,7 @@ public class SpaciaMan {
 	public static void main(String[] args) {
 
 		CommandClient client = new CommandClientBuilder().setOwnerId(OWNER)
-				.addCommands(new BaseCommand())
+				.addCommands(new KickCommand())
 				.setCoOwnerIds(CO_OWNERS)
 				.setActivity(Activity.watching(" for someone to kick | kc:help"))
 				.setPrefix("kc:")
