@@ -2,6 +2,8 @@ package ovh.excale.test;
 
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
 import ovh.excale.HibernateUtil;
 import ovh.excale.discord.spaciaman.models.UserModel;
 
@@ -14,8 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UsersTest {
 
+	private static final Logger logger = LoggerFactory.getLogger(UsersTest.class);
+
 	@Test
-	void insert_user_test() {
+	void get_users_test() {
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		assertNotNull(factory, "SessionFactory null");
@@ -30,7 +34,7 @@ public class UsersTest {
 				.getResultList();
 
 		assertNotEquals(users.size(), 0);
-		System.out.println("Size: " + users.size());
+		logger.info(() -> "Size: " + users.size());
 
 	}
 
