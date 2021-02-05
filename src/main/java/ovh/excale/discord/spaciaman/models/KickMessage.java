@@ -16,7 +16,7 @@ public class KickMessage {
 	private @NotNull String message;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "id_user")
+	@JoinColumn(name = "id_user", nullable = false)
 	private UserModel user;
 
 	public String getId() {

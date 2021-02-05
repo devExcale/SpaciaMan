@@ -16,13 +16,13 @@ public class UserModel {
 	@Column(name = "nickname")
 	private String nickname;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "kicked")
 	private Set<KickAction> kicks;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<RoleSnapshot> roles;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", targetEntity = KickMessage.class)
 	private List<KickMessage> kickMessages;
 
 	public UserModel setSnowflake(long snowflake) {
