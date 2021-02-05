@@ -6,8 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class KickRepository {
 
-
-
 	public @Nullable UserModel getUser(@NotNull User user) {
 		return getUser(user.getIdLong());
 	}
