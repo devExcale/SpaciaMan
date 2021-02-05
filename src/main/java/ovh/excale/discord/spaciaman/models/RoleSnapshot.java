@@ -46,7 +46,7 @@ public class RoleSnapshot {
 		return this;
 	}
 
-	public Long getRoleId() {
+	public @Nullable Long getRoleId() {
 		return roleId;
 	}
 

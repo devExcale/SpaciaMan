@@ -2,6 +2,7 @@ package ovh.excale.discord.spaciaman.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,26 @@ public class UserModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
 	private List<KickMessage> kickMessages;
 
+	public UserModel setNickname(String nickname) {
+		this.nickname = nickname;
+		return this;
+	}
+
+	public UserModel setKicks(Set<KickAction> kicks) {
+		this.kicks = kicks;
+		return this;
+	}
+
+	public UserModel setRoleSnapshots(Set<RoleSnapshot> roles) {
+		this.roles = roles;
+		return this;
+	}
+
+	public UserModel setKickMessages(List<KickMessage> kickMessages) {
+		this.kickMessages = kickMessages;
+		return this;
+	}
+
 	public Long getSnowflake() {
 		return snowflake;
 	}
@@ -32,36 +53,20 @@ public class UserModel {
 		return nickname;
 	}
 
-	public UserModel setNickname(String nickname) {
-		this.nickname = nickname;
-		return this;
-	}
-
 	public Set<KickAction> getKicks() {
 		return kicks;
 	}
 
-	public UserModel setKicks(Set<KickAction> kicks) {
-		this.kicks = kicks;
-		return this;
-	}
-
-	public Set<RoleSnapshot> getRoles() {
+	public Set<RoleSnapshot> getRoleSnapshots() {
 		return roles;
-	}
-
-	public UserModel setRoles(Set<RoleSnapshot> roles) {
-		this.roles = roles;
-		return this;
 	}
 
 	public List<KickMessage> getKickMessages() {
 		return kickMessages;
 	}
 
-	public UserModel setKickMessages(List<KickMessage> kickMessages) {
-		this.kickMessages = kickMessages;
-		return this;
+	public KickMessage getRandomKickMessage() {
+		return kickMessages.get(new Random().nextInt() % kickMessages.size());
 	}
 
 }
