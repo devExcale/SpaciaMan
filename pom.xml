@@ -56,14 +56,19 @@
 			<groupId>com.jagrosh</groupId>
 			<artifactId>jda-utilities-commons</artifactId>
 			<version>${jda.utilities.version}</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.jagrosh</groupId>
 			<artifactId>jda-utilities-command</artifactId>
 			<version>${jda.utilities.version}</version>
-			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
