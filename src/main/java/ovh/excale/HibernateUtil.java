@@ -3,11 +3,13 @@ package ovh.excale;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.Nullable;
-import ovh.excale.discord.spaciaman.SpaciaMan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HibernateUtil {
 
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static final Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+	private static SessionFactory sessionFactory = buildSessionFactory();
 
 	private static @Nullable SessionFactory buildSessionFactory() {
 		try {
@@ -17,13 +19,15 @@ public class HibernateUtil {
 					.buildSessionFactory();
 
 		} catch(Exception e) {
-			SpaciaMan.logger.error("Initial SessionFactory creation failed", e);
+			logger.error("Initial SessionFactory creation failed", e);
 		}
 
 		return null;
 	}
 
 	public static @Nullable SessionFactory getSessionFactory() {
+		if(sessionFactory == null)
+			sessionFactory = buildSessionFactory();
 		return sessionFactory;
 	}
 
