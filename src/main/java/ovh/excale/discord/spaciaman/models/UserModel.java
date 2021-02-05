@@ -25,6 +25,11 @@ public class UserModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_user")
 	private List<KickMessage> kickMessages;
 
+	public UserModel setSnowflake(long snowflake) {
+		this.snowflake = snowflake;
+		return this;
+	}
+
 	public UserModel setNickname(String nickname) {
 		this.nickname = nickname;
 		return this;
