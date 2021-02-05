@@ -6,12 +6,13 @@ import org.jetbrains.annotations.Nullable;
 import ovh.excale.discord.spaciaman.SpaciaMan;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "roles")
 @Where(clause = "id_role IS NOT NULL")
-public class RoleSnapshot {
+public class RoleSnapshot implements Serializable {
 
 	@Id
 	@Column(name = "id_user")
@@ -24,7 +25,7 @@ public class RoleSnapshot {
 	private @Nullable Long roleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name = "id_user")
+	@JoinColumn(name = "id_user", nullable = false)
 	private UserModel user;
 
 	public @Nullable Role getRole() {

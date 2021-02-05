@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ovh.excale.HibernateUtil;
 import ovh.excale.discord.spaciaman.commands.KickCommand;
 
 import java.io.InputStream;
@@ -102,7 +103,9 @@ public class SpaciaMan {
 
 		try {
 
-			jda = JDABuilder.create(TOKEN, GatewayIntent.GUILD_MESSAGES)
+			jda = JDABuilder.create(TOKEN,
+					GatewayIntent.GUILD_MESSAGES,
+					GatewayIntent.GUILD_MEMBERS)
 					.disableCache(CacheFlag.ACTIVITY,
 							CacheFlag.VOICE_STATE,
 							CacheFlag.EMOTE,
@@ -116,7 +119,12 @@ public class SpaciaMan {
 			System.exit(-1);
 		}
 
-		logger.info("Bot running on version {}.", VERSION);
+		logger.info("Bot running on version {}", VERSION);
+
+		if(HibernateUtil.isConnected())
+			logger.info("Connected to datasource");
+		else
+			logger.warn("Couldn't connect to datasource");
 
 	}
 

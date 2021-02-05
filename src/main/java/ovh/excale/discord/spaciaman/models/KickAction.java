@@ -4,29 +4,30 @@ import net.dv8tion.jda.api.entities.User;
 import ovh.excale.discord.spaciaman.SpaciaMan;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "kicks")
-public class KickAction {
+public class KickAction implements Serializable {
 
 	@Id
-	@Column(name = "id_user")
+	@Column(name = "id_user", updatable = false)
 	private Long kickedId;
 
 	@Id
-	@Column(name = "id_kicker")
+	@Column(name = "id_kicker", updatable = false)
 	private Long kickerId;
 
 	@Id
 	private Timestamp timestamp;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name = "id_user")
+	@JoinColumn(name = "id_user", nullable = false)
 	private UserModel kicked;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "id_kicker")
+	@JoinColumn(name = "id_kicker", nullable = false)
 	private UserModel kicker;
 
 	public User getKickedUser() {
