@@ -3,6 +3,7 @@ package ovh.excale.discord.spaciaman;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import ovh.excale.HibernateUtil;
 import ovh.excale.discord.spaciaman.models.KickMessage;
 import ovh.excale.discord.spaciaman.models.UserModel;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class UserRepository implements AutoCloseable {
 
 	private final Session session;
+	private final Transaction tx;
 
 	public UserRepository() throws IllegalStateException {
 
@@ -23,6 +25,8 @@ public class UserRepository implements AutoCloseable {
 			throw new IllegalStateException("Cannot connect to datasource");
 
 		session = factory.openSession();
+		tx = session.getTransaction();
+		tx.begin();
 	}
 
 	public Optional<UserModel> getUser(long id) {
@@ -56,7 +60,20 @@ public class UserRepository implements AutoCloseable {
 
 	@Override
 	public void close() throws HibernateException {
+		tx.commit();
 		session.close();
+	}
+
+	public void commit() {
+		tx.commit();
+	}
+
+	public void rollback() {
+		tx.rollback();
+	}
+
+	public Transaction getTransaction() {
+		return tx;
 	}
 
 	public boolean isOpen() {
