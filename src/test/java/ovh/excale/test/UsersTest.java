@@ -1,20 +1,19 @@
 package ovh.excale.test;
 
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
-import ovh.excale.HibernateUtil;
+import ovh.excale.discord.spaciaman.UserRepository;
 import ovh.excale.discord.spaciaman.models.UserModel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class UsersTest {
@@ -22,22 +21,56 @@ public class UsersTest {
 	private static final Logger logger = LoggerFactory.getLogger(UsersTest.class);
 
 	@Test
-	void get_users() {
+	@Order(1)
+	void get_all_users() {
 
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		assertNotNull(factory, "SessionFactory null");
+		UserRepository repo = new UserRepository();
+		List<UserModel> users = repo.getAllUsers();
 
-		EntityManager em = factory.createEntityManager();
-
-		CriteriaQuery<UserModel> criteria = em.getCriteriaBuilder()
-				.createQuery(UserModel.class);
-		criteria.from(UserModel.class);
-
-		List<UserModel> users = em.createQuery(criteria)
-				.getResultList();
-
-		assertNotEquals(users.size(), 0);
+		assumingThat(users.size() == 0, () -> assertTrue(repo.isOpen()));
 		logger.info(() -> "Size: " + users.size());
+
+		repo.close();
+
+	}
+
+	@Test
+	@Order(2)
+	void insert_and_retrieve() {
+
+		UserModel user = new UserModel().setSnowflake(123L)
+				.setNickname("testestest");
+
+		UserRepository repo = new UserRepository();
+		repo.saveUser(user);
+
+		Optional<UserModel> retrived = repo.getUser(123L);
+
+		assertTrue(retrived.isPresent(), "UserModel not found when supposed to");
+		assertEquals(user.getSnowflake(),
+				retrived.get()
+						.getSnowflake(),
+				"UserModel snowflake mismatch");
+
+		repo.close();
+
+	}
+
+	@Test
+	@Order(3)
+	void and_delete() {
+
+		UserRepository repo = new UserRepository();
+		Optional<UserModel> userOptional = repo.getUser(123L);
+
+		assertTrue(userOptional.isPresent(), "UserModel not found when supposed to");
+
+		repo.deleteUser(userOptional.get());
+		userOptional = repo.getUser(123L);
+
+		assertFalse(userOptional.isPresent(), "UserModel found when not supposed to");
+
+		repo.close();
 
 	}
 
