@@ -10,6 +10,7 @@ public class KickMessage {
 
 	@Id
 	@Column(name = "id_msg")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	@Column
