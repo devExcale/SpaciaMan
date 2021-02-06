@@ -1,6 +1,8 @@
 package ovh.excale.test;
 
 import org.hibernate.SessionFactory;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
@@ -14,12 +16,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class UsersTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(UsersTest.class);
 
 	@Test
-	void get_users_test() {
+	void get_users() {
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		assertNotNull(factory, "SessionFactory null");
