@@ -1,9 +1,11 @@
 package ovh.excale.test;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import ovh.excale.discord.spaciaman.UserRepository;
@@ -15,7 +17,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@TestMethodOrder(OrderAnnotation.class)
+@DisplayNameGeneration(ReplaceUnderscores.class)
 public class UsersTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(UsersTest.class);
@@ -52,6 +55,9 @@ public class UsersTest {
 						.getSnowflake(),
 				"UserModel snowflake mismatch");
 
+		logger.info(() -> "Size: " + repo.getAllUsers()
+				.size());
+
 		repo.close();
 
 	}
@@ -69,6 +75,9 @@ public class UsersTest {
 		userOptional = repo.getUser(123L);
 
 		assertFalse(userOptional.isPresent(), "UserModel found when not supposed to");
+
+		logger.info(() -> "Size: " + repo.getAllUsers()
+				.size());
 
 		repo.close();
 
