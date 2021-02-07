@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 @TestMethodOrder(OrderAnnotation.class)
-@DisplayNameGeneration(ReplaceUnderscores.class)
 public class UsersTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(UsersTest.class);

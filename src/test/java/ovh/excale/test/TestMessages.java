@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class TestMessages {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestMessages.class);

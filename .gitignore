@@ -1,2 +1,3 @@
 /target/
 /src/main/resources/filter-values.properties
+/src/test/resources/filter-values.properties
