@@ -10,6 +10,8 @@
 		<property name="hibernate.connection.username">${hibernate.connection.username}</property>
 		<property name="hibernate.connection.password">${hibernate.connection.password}</property>
 		<property name="hibernate.connection.url">${hibernate.connection.url}</property>
+		<!--suppress HibernateConfigDomInspection -->
+		<property name="hibernate.default_schema">${hibernate.schema}</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
 		<property name="show_sql">false</property>
 

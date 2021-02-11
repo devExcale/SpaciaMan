@@ -1,6 +1,8 @@
 package ovh.excale.test;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import ovh.excale.discord.spaciaman.UserRepository;
@@ -26,6 +28,9 @@ public class TestMessages {
 		repo.saveUser(user);
 
 		Optional<UserModel> optional = repo.getUser(123L);
+
+		repo.close();
+		logger.info(() -> "User saved");
 
 		assertTrue(optional.isPresent());
 		assertEquals("testuser",
