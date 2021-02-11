@@ -100,6 +100,8 @@
 			<filter>src/main/resources/filter-values.properties</filter>
 		</filters>
 
+		<testSourceDirectory>test/java</testSourceDirectory>
+
 		<plugins>
 
 			<plugin>
